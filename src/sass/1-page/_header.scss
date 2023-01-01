@@ -1,0 +1,91 @@
+.header {
+    padding: 5px 70px;
+    background: var(--main-color);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__info {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    &__logo {
+        margin-right: 100px;
+        cursor: pointer;
+    }
+    &__link {
+        margin-right: 40px;
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: .5s;
+        text-decoration: none;
+        &:hover {
+            transform: scale(1.02);
+        }
+        &:nth-child(4) {
+            margin-right: 0;
+        }
+    }
+    &__connect {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    &__email {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 100px;
+        &-img {
+            margin-right: 10px;
+        }
+        &-mail {
+            font-family: 'Roboto';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: .5s;
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+    &__telephone {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        &-img {
+            margin-right: 10px;
+        }
+        &-numbers {
+            display: flex;
+            flex-direction: column;
+        }
+        &-link {
+            font-family: 'Roboto';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: .5s;
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+}

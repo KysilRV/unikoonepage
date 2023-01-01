@@ -1,0 +1,99 @@
+.footer {
+    margin-top: 120px;
+    padding: 60px 100px 60px 150px;
+    background: var(--main-color);
+    box-shadow: 6px 0px 4px 4px rgba(0, 0, 0, 0.25);
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__logo {
+        cursor: pointer;
+    }
+    &__link {
+        display: inline-block;
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+        color: var(--text-color);
+        margin-right: 40px;
+        text-decoration: none;
+        transition: .5s;
+        cursor: pointer;
+        &:hover {
+            color: black;
+            transform: scale(1.02);
+        }
+        &:nth-child(4) {
+            margin-right: 0;
+        }
+    }
+    &__connect {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__email {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 80px;
+        &-img {
+            margin-right: 12px;
+        }
+        &-mail {
+            font-family: 'Roboto';
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: .5s;
+            &:hover {
+                color: #000;
+                transform: scale(1.02);
+            }
+        }
+    }
+    &__telephone {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-img {
+            margin-right: 10px;
+        }
+        &-numbers {
+            display: flex;
+            flex-direction: column;
+        }
+        &-link {
+            font-family: 'Roboto';
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: .5s;
+            &:hover {
+                color: #000;
+                transform: scale(1.02);
+            }
+        }
+    }
+    &__internet {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-item {
+            transition: .5s; 
+            &:hover {
+                transform: scale(1.02);
+                filter: brightness(10%);
+            }
+        }
+    }
+}
