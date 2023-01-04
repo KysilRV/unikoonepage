@@ -1,0 +1,83 @@
+:root {
+    --main-color: #EEEDEB;
+    --text-color: #2B2B2B;
+    --section-text: #909090;
+    --fire-text: #FF7F00;
+    --mark-color: #958686;
+    --white: #fff;
+    --class-color: #919191;
+    --label: #515151;
+    --placeholder: #aaaaaa;
+    --nametag: #787878;
+    --input: #F0F0F0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.statusMessage {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textMessage {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.failText {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+    margin-top: 70px;
+}
+
+.show-overlay {
+    opacity: 1;
+    z-index: 5;
+}
+
+._error {
+    box-shadow: 0 0 15px red; 
+}
+
+.displayNone {
+    display: none;
+}
+
+.displayBlock {
+    display: block;
+}
+
+.container {
+    position: relative;
+    width: 1215px;
+    margin: 0 auto;
+}
+
+@import '../../node_modules/animate.css/animate.css';
+@import '1-page/header';
+@import '1-page/promo';
+@import '1-page/products';
+@import '1-page/about';
+@import '1-page/question';
+@import '1-page/footer';
+@import '1-page/policy';
+@import '1-page/cart';

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/svg" href="icons/favicon-32x32.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.min.css">
+    <title>Юніко</title>
+</head>
+<body>
+    <div id="index">
+        <header class="header">
+            <div class="header__wrapper">
+                <div class="header__info">
+                    <img src="img/logo.svg" alt="logo" class="header__logo animate__animated animate__fadeInLeft">
+                    <a href="payment.html" class="header__link animate__animated animate__fadeInLeft">Доставка та оплата</a>
+                    <a href="policy.html" class="header__link">Политика конфиденциальности</a>
+                </div>
+                <div class="header__connect">
+                    <div class="header__email animate__animated animate__fadeInRight">
+                        <img src="icons/email.svg" alt="email" class="header__email-img">
+                        <a href="example@smth.com" class="header__email-mail">example@smth.com</a>
+                    </div>
+                    <div class="header__telephone animate__animated animate__fadeInRight">
+                        <img src="icons/phone.svg" alt="phone" class="header__telephone-img">
+                        <div class="header__telephone-numbers">
+                            <a href="tel:380000000000" class="header__telephone-link">+380000000000</a>
+                            <a href="tel:380000000000" class="header__telephone-link">+380000000000</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="invisible"></div>
+                <div class="header__block animate__animated">
+                    <img src="icons/cart.svg" alt="cart" class="header__cart">
+                    <div class="header__num">0</div>
+                </div>
+            </div>
+        </header>
+    
+        <div class="page-1">
+            <section class="promo">
+                <div class="promo__wrapper">
+                    <div class="promo__slider">
+                        <div class="promo__slide">
+                            <img src="img/slider-img-1.png" alt="cases" class="promo__slide-img">
+                            <h1 class="promo__slide-class animate__animated animate__fadeInLeft">Чохли на ваш <br> телефон</h1>
+                        </div>
+                        <div class="promo__slide">
+                            <img src="img/slide-2.jpg" alt="cabels" class="promo__slide-img">
+                            <h2 class="promo__slide-class">Зарядні пристрої <br> та кабелі</h2>
+                        </div>
+                        <div class="promo__slide">
+                            <img src="img/slide-3.png" alt="other" class="promo__slide-img">
+                            <h2 class="promo__slide-class">Інші аксесури для <br> ваших гаджетів</h2>
+                        </div>
+                    </div>
+                </div>
+                <img class="promo__next" src="icons/right-btn.svg" alt="next">
+                <img class="promo__prev" src="icons/left-btn.svg" alt="prev">
+            </section>
+        
+            <section class="products">
+                <div class="container">
+                    <h2 class="products__title">Наші товари</h2>
+                    <div class="products__filter">
+                        <button class="products__show">
+                            <div class="products__text">Фільтри</div>
+                            <div class="products__chevrondown"><img src="icons/chevron-down.svg" alt="chevron" class="products__chevron"></div>
+                        </button>
+                        <div class="products__blockshow animate__animated" style="opacity: 0">
+                            <button class="products__filter-btn" id="caseBtn">Чохли</button>
+                            <button class="products__filter-btn" id="chargeBtn">Зарядні пристрої</button>
+                            <button class="products__filter-btn" id="braceletBtn">Браслети з паракорду</button>
+                            <button class="products__filter-btn" id="otherBtn">Інше</button>
+                            <button class="products__filter-btn" id="allBtn">Всі товари</button>
+                            <button class="products__filter-btn" id="returnBtn">Повернутися</button>
+                        </div>
+                    </div>
+                    <div class="products__block startBlock case animate__animated">
+                        <div class="products__class">Чехли</div>
+                        <div class="products__grid">
+                            <div class="products__product start" id="yellowCase">
+                                <img src="img/yellow-case.png" alt="case" class="products__img">
+                                <h3 class="products__name">Чохол Silicone Case для iPhone 11 Yellow</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price fire-text">160 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="blackCase">
+                                <img src="img/black-case.png" alt="case" class="products__img">
+                                <h3 class="products__name">Чохол Silicone Case для iPhone 11 Black</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.7</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">160 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="greyCase">
+                                <img src="img/grey-case.png" alt="case" class="products__img">
+                                <h3 class="products__name">Чохол Silicone Case для iPhone 11 Grey</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.7</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart">
+                                    <div class="products__price">160 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="darkBlueProCase">
+                                <img src="img/grey-case.png" alt="case" class="products__img">
+                                <div class="products__name">Чохол Silicone Case для iPhone 11 Pro Max Dark Blue</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.9</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">170 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="yellowProMaxCase">
+                                <img src="img/yellow-case.png" alt="case" class="products__img">
+                                <div class="products__name">Чохол Silicone Case для iPhone 11 Pro Max Yellow</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="fire-text" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">150 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="redCase">
+                                <img src="img/red-case.png" alt="case" class="products__img">
+                                <div class="products__name">Чохол Silicone Case для iPhone 11 Red</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.7</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">130 грн</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products__block startBlock cabel animate__animated">
+                        <div class="products__class">Кабеля зарядки</div>
+                        <div class="products__grid">
+                            <div class="products__product start" id="hocoRed">
+                                <img src="img/hoco-silicone.png" alt="hoco" class="products__img">
+                                <h3 class="products__name">Кабель зарядки HOCO SILICONE X21 PLUS Red</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.6</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">150 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="hocoWhite">
+                                <img src="img/superior-white.png" alt="cabel" class="products__img">
+                                <h3 class="products__name">Кабель USB Hoco X29 Superior style Lightning білий</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">5.0</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">105 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="hocoBlack">
+                                <img src="img/superior-black.png" alt="cabel" class="products__img">
+                                <h3 class="products__name">Кабель USB Hoco X29 Superior style Lightning чорний</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.7</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">110 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="hocoBigOrange">
+                                <img src="img/hoco-orwnge.png" alt="cabel" class="products__img">
+                                <div class="products__name">Кабель зарядки HOCO SILICONE X21 PLUS Orange</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">5.0</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">190 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="borofoneCharge">
+                                <img src="img/borofone-20w.png" alt="borofone" class="products__img">
+                                <h3 class="products__name">Мережевий Зарядний Пристрій Borofone BA38A Plus PD 20W 3A </h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">230 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product displayNone" id="borofoneChargeOrange">
+                                <img src="img/borofone-orange.png" alt="borofone" class="products__img">
+                                <div class="products__name">Сетевое Зарядное Устройство Borofone BA61A 2.1A 5V 10.5W</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">190 грн</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products__block startBlock other animate__animated">
+                        <div class="products__class">Остальное</div>
+                        <div class="products__grid">
+                            <div class="products__product start products__product-other" id="borofone">
+                                <img src="img/borotone.png" alt="borofone" class="products__img">
+                                <h3 class="products__name">Автотримач Borofone BH52 </h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">170 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start products__product-other" id="hocoHeadphones">
+                                <img src="img/hoco.png" alt="hoco" class="products__img">
+                                <h3 class="products__name">Навушники Hoco M86 Army Green</h3>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">160 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start products__product-other" id="hocoHeadphonesBlack">
+                                <img src="img/hoco-blue.png" alt="hoco" class="products__img">
+                                <div class="products__name">Навушники Hoco M86 Black </div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">160 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product products__product-other displayNone" id="usbPowerBank">
+                                <img src="img/usb-powerbank.png" alt="borofone" class="products__img">
+                                <div class="products__name">Лампа USB для power bank, нічник</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">63 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product products__product-other displayNone" id="powerbar">
+                                <img src="img/powerbar.png" alt="powerbar" class="products__img">
+                                <div class="products__name">Powerbar PowerGel Shots raspberry</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">224 грн</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products__block braclete animate__animated">
+                        <div class="products__class">Браслети з паракорду</div>
+                        <div class="products__grid">
+                            <div class="products__product start" id="paracordGrey">
+                                <img src="img/paracord-grey.png" alt="paracord" class="products__img">
+                                <div class="products__name">Браслет з паракорду трилобіт</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">128 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="paracordCobra">
+                                <img src="img/paracordCobra.png" alt="paracord" class="products__img">
+                                <div class="products__name">Браслет з паракорду кобра</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">104 грн</div>
+                                </div>
+                            </div>
+                            <div class="products__product start" id="paracordGreen">
+                                <img src="img/paracord-green.png" alt="paracord" class="products__img">
+                                <div class="products__name">Браслет з паракорду подвійна кобра</div>
+                                <div class="products__wrapper">
+                                    <div class="products__mark">
+                                        <img src="icons/star.svg" alt="star" class="products__star">
+                                        <div class="products__num">4.8</div>
+                                    </div>
+                                    <img src="icons/cart.svg" alt="cart" class="products__cart animate__animated">
+                                    <div class="products__price">128 грн</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section class="about">
+                <div class="container">
+                    <div class="about__wrapper">
+                        <img src="img/about.png" alt="about" class="about__img">
+                        <div class="about__info">
+                            <h2 class="about__title">Немного о нас</h2>
+                            <p class="about__text">Ми компания яка дарує людям змогу користуватися їх гаджетами с задоволенням та комфортом. Ми допоможемо вам знайти те що вам потрібно!
+                                <br><br>
+                                В наш час усім потрібні гаджети, а до них потрібні аксесури, наші менеджери допоможуть вам знайти їх і ваше користування пристроями вийде на новий рівень!)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section class="question">
+                <div class="container">
+                    <div class="question__block">
+                        <img src="img/contact.png" alt="illustration" class="question__img">
+                        <div class="question__wrapper">
+                            <h2 class="question__title">Что-то понравилось, пишите!</h2>
+                            <form action="#" id="form" class="question__form">
+                                <div class="question__inputs">
+                                    <div class="question__nametag">
+                                        <label for="question__name" class="question__top">Полное имя</label>
+                                        <input type="text" name="user_name" id="name" required placeholder="Ваше полное имя" class="question__name _req">
+                                    </div>
+                                    <div class="question__nametag">
+                                        <label class="question__center" for="question__email _email">Ваша почта</label>
+                                        <input type="email" id="email" name="user_email" required placeholder="Ваша електронная почта" class="question__email _req">
+                                    </div>
+                                </div>
+                                <div class="question__nametag">
+                                    <label for="question__question" class="question__bottom">Ваши вопросы</label>
+                                    <textarea name="user_text" type="text" id="text" placeholder="Ваши вопросы" class="question__question _req"></textarea>
+                                </div>
+                                <div class="question__btns">
+                                    <button class="question__btn" type="submit">Отправить!</button>
+                                    <div class="question__policy">
+                                        <input type="checkbox" required class="question__checkbox _req">
+                                        <a href="policy.html" class="question__link">Политика конфиденциальности</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    
+        <footer class="footer">
+            <div class="footer__wrapper">
+                <img src="img/logo.svg" alt="logo" class="footer__logo">
+                <div class="footer__links">
+                    <a href="products.html" class="footer__link">Продукція</a>
+                    <a href="payment.html" class="footer__link">Доставка та оплата</a>
+                    <a href="policy.html" class="header__link">Политика конфиденциальности</a>
+                </div>
+                <div class="footer__grid">
+                    <div class="footer__connect">
+                        <div class="footer__email">
+                            <img src="icons/email.svg" alt="email" class="footer__email-img">
+                            <a href="example@smth.com" class="footer__email-mail">example@smth.com</a>
+                        </div>
+                        <div class="footer__telephone">
+                            <img src="icons/phone.svg" alt="phone" class="footer__telephone-img">
+                            <div class="footer__telephone-numbers">
+                                <a href="tel:380000000000" class="footer__telephone-link">+380000000000</a>
+                                <a href="tel:380000000000" class="footer__telephone-link">+380000000000</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__internet">
+                        <a href="#" class="footer__internet-item"><img src="icons/facebook.svg" alt="facebook" class="footer__item"></a>
+                        <a href="#" class="footer__internet-item"><img src="icons/insta.svg" alt="inst" class="footer__item"></a>
+                        <a href="#" class="footer__internet-item"><img src="icons/linked.svg" alt="linked" class="footer__item"></a>
+                        <a href="#" class="footer__internet-item"><img src="icons/telegram.svg" alt="telegram" class="footer__item"></a>
+                        <a href="#" class="footer__internet-item"><img src="icons/twitter.svg" alt="twitter" class="footer__item"></a>
+                        <a href="#" class="footer__internet-item"><img src="icons/youtube.svg" alt="youtube" class="footer__item"></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="overlay animate__animated">
+            <div class="cart animate__animated">
+                <div class="container">
+                    <div class="cart__wrapper">
+                        <h2 class="cart__title">Корзина</h2>
+                        <button class="cart__close"><img src="icons/close.svg" alt="close"></button>
+                        <div class="cart__grid">
+                            <img src="icons/nothingFound.svg" alt="nothingFound" class="cart__nothing animate__animated">
+                            <div class="cart__notFound animate__animated">Корзина пуста</div>
+                        </div>
+                        <div class="cart__divider"></div>
+                        <div class="cart__end">
+                            <div class="cart__btns">
+                                <button class="cart__continue">Продолжить покупки</button>
+                                <button class="cart__pay animate__animated">Перейти к оплате</button>
+                            </div>
+                            <div class="card__end">--- грн</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
