@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let cart = [],
         cartNumber = 0,
-        sum;
+        sum = 0;
 
     const indexPage = 'index.html',
           body = document.querySelector('body'),
@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
         slider.style.width = 100 * slides.length + '%';
         slider.style.display = 'flex';
         slider.style.transition = '0.65s all';
-        sliderWrapper.style.overflow = 'hidden';
+        sliderWrapper.style.overflowY = 'hidden';
 
         slides.forEach(slides => {
             slides.style.width = width;
@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     cartBtn.addEventListener('click', function() {
-        body.style.overflow = 'hidden';
+        body.style.overflowY = 'hidden';
         this.classList.add('animate__fadeOut');
         this.classList.remove('aimate__fadeIn');
         cartBtn.classList.remove('animate__fadeIn');
@@ -137,16 +137,21 @@ window.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'block';
     });
 
-    cartClose.addEventListener('click', () => {
-        body.style.overflow = 'scroll';
-        cartModal.classList.add('animate__fadeOut');
-        cartBtn.classList.remove('animate__fadeOut');
-        cartBtn.classList.add('animate__fadeIn');
-        setTimeout(() => {
-            overlay.style.display = 'none';
-        }, 400);
-        overlay.classList.add('animate__fadeOut');
-    });
+    function cartCloseBlock(btn) {
+        btn.addEventListener('click', () => {
+            body.style.overflowY = 'scroll';
+            cartModal.classList.add('animate__fadeOut');
+            cartBtn.classList.remove('animate__fadeOut');
+            cartBtn.classList.add('animate__fadeIn');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+            overlay.classList.add('animate__fadeOut');
+        });
+    };
+
+    cartCloseBlock(cartClose);
+    cartCloseBlock(document.querySelector('.cart__continue'));
 
     function createCardBlock() {
         getResource('./db.json')
@@ -167,8 +172,6 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     setSum(cartNum);
-
-    console.log(cart);
 
     cart.forEach(item => {
         const block = document.querySelector(`[data-code="${item}"]`),
@@ -204,7 +207,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 createBlock(name, price, stars, src, alt, code, value, thisNum);
-                console.log(document.querySelectorAll(`.cart__input`))
                 calcSum(document.querySelectorAll(`.cart__input`), price)
 
                 messageAdd.style.top = '0';
@@ -215,8 +217,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 setSum(cartNum);
 
                 localStorage.setItem(thisNum, code);
-
-                removeNotFound();
             });
         });
     };
@@ -226,6 +226,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
         card.classList.add('cart__block');
         card.setAttribute('id', alt);
+        card.setAttribute('data-id', thisNum);
         card.setAttribute('data-code', code);
 
         card.innerHTML = `
@@ -251,6 +252,7 @@ window.addEventListener('DOMContentLoaded', () => {
         cartGrid.appendChild(card);
 
         removeNotFound();
+        // removeBlock(card.querySelector('.cart__closeBlock'));
 
         const thisLot = card.querySelector('.cart__lot');
                 
@@ -270,7 +272,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 --cartInput.value;
                 localStorage.setItem(code, cartInput.value);
                 setSum(cartNum);
-                calcSum(document.querySelectorAll(`.cart__input`), price);
+                sumMinus(price);
                 if (cartInput.value <= 0) {
                     thisCartBlock.remove();
                     setSum(cartNum);
@@ -283,15 +285,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function calcSum(block, price) {
         const end = document.querySelector('.card__endPrice');
-
+        sum = 0;
         if (block) {
             block.forEach(input => {
-                console.log(input.value)
-                if (+input.value) {
-                    sum = +price.slice(0, -4);
-                } else {    
-                    sum = +price.slice(0, -4) * +input.value;
-                }
+                sum += +price.slice(0, -4) * +input.value;
             });
             end.textContent = `${sum} грн`;
         } else {
@@ -299,8 +296,15 @@ window.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+    function sumMinus(price) {
+        const end = document.querySelector('.card__endPrice');
+        sum -= +price.slice(0, -4);
+        end.textContent = `${sum} грн`;
+    };
+
     function setSum(variable) {
         let num = 0;
+        const end = document.querySelector('.card__endPrice');
         const inputs = document.querySelectorAll('.cart__input');
     
         inputs.forEach(input => {
@@ -308,19 +312,66 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         variable.textContent = num;
+
+        addNotFound(num, end);
     };
 
     function removeNotFound() {
         if (cartNumber >= 0) {
             cartNotFoundImg.style.display = 'none';
             cartNotFoundText.style.display = 'none';
-            btnPay.style.display = 'none';
-        } else {
-            cartNotFoundImg.style.display = 'block';
-            cartNotFoundText.style.display = 'block';
-            btnPay.style.display = 'block';
+            btnPay.style.visibility= 'visible';
         };
     };
+
+    function addNotFound(num, end) {
+        if (num <= 0) {
+            end.textContent = `--- грн`;
+            cartNotFoundImg.style.display = 'block';
+            cartNotFoundText.style.display = 'block';
+            btnPay.style.visibility= 'hidden';
+
+            cartNotFoundImg.classList.remove('animate__fadeOut');
+            cartNotFoundImg.classList.add('animate__fadeIn');
+            cartNotFoundText.classList.remove('animate__fadeOut');
+            cartNotFoundText.classList.add('animate__fadeIn');
+            btnPay.classList.add('animate__fadeOut');
+            btnPay.classList.remove('animate__fadeIn');
+        } else {
+            btnPay.style.visibility= 'visible';
+            btnPay.classList.remove('animate__fadeOut');
+            btnPay.classList.add('animate__fadeIn');
+        }
+    }
+
+    // function removeBlock(btn) {
+    //     btn.addEventListener('click', function() {
+    //         let num = 0;
+    //         const end = document.querySelector('.card__endPrice'),
+    //                 inputs = document.querySelectorAll('.cart__input'),
+    //                 thisBlock = this.parentNode,
+    //                 value = thisBlock.querySelector('.cart__input').value,
+    //                 price = thisBlock.querySelector('.cart__price').textContent.slice(0, -4);
+            
+    //         inputs.forEach(input => {
+    //             num = +input.value + num;
+    //         });
+
+    //         thisBlock.remove();
+    //         localStorage.removeItem(thisBlock.getAttribute('data-id'));
+    //         localStorage.removeItem(thisBlock.getAttribute('data-code'));
+
+    //         sum -= +value * price;
+    //         console.log(+value * price)
+    //         end.textContent = `${sum} грн`;
+    //         if (sum <= 0) {
+    //             end.textContent = `--- грн`;
+    //             addNotFound(num, end);
+    //             setSum(cartNum);
+    //         };
+    //     });
+    // };
+
 
     function filter(btn, theme, removeAn, showSelector) {
         btn.addEventListener('click', () => {
