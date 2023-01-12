@@ -1,0 +1,182 @@
+[
+    {
+        "code": "phdPzdgs8T",
+        "alt": "yellowCase",
+        "num": 0,
+        "name": "Чохол Silicone Case для iPhone 11 Yellow",
+        "price": "160 грн",
+        "stars": "4.8",
+        "src": "img/yellow-case.png"
+    },
+    {
+        "code": "9OAhCfy9ph",
+        "alt": "blackCase",
+        "num": 1, 
+        "name": "Чохол Silicone Case для iPhone 11 Black",
+        "price": "160 грн",
+        "stars": "4.7",
+        "src": "img/black-case.png"
+    },
+    {
+        "code": "k7J1qKjoWe",
+        "alt": "greyCase",
+        "num": 2,
+        "name": "Чохол Silicone Case для iPhone 11 Grey",
+        "price": "160 грн",
+        "stars": "4.7",
+        "src": "img/grey-case.png"
+    },
+    {
+        "code": "Z9Hy2uCs4k",
+        "alt": "darkBlueProCase",
+        "num": 3,
+        "name": "Чохол Silicone Case для iPhone 11 Pro Max Dark Blue",
+        "price": "170 грн",
+        "stars": "4.9",
+        "src": "img/grey-case.png"
+    },
+    {
+        "code": "l2O5b3Wmdn",
+        "alt": "yellowProMaxCase",
+        "num": 4,
+        "name": "Чохол Silicone Case для iPhone 11 Pro Max Yellow",
+        "price": "150 грн",
+        "stars": "4.8",
+        "src": "img/yellow-case.png"
+    },
+    {
+        "code": "U8dU6Lg1XY",
+        "alt": "redCase",
+        "num": 5,
+        "name": "Чохол Silicone Case для iPhone 11 Red",
+        "price": "130 грн",
+        "stars": "4.7",
+        "src": "img/red-case.png"
+    },
+    {
+        "code": "36FvFzk6jW",
+        "alt": "hocoRed",
+        "num": 6,
+        "name": "Kaбель зарядки HOCO SILICONE X21 PLUS Red",
+        "price": "150 грн",
+        "stars": "4.6",
+        "src": "img/hoco-silicone.png"
+    },
+    {
+        "code": "tRrkYwoPd9",
+        "alt": "hocoWhite",
+        "num": 7, 
+        "name": "Кабель USB Hoco X29 Superior style Lightning білий",
+        "price": "105 грн",
+        "stars": "5.0",
+        "src": "img/superior-white.png"
+    },
+    {
+        "code": "WTLFXaTfog",
+        "alt": "hocoBlack",
+        "num": 8,
+        "name": "Кабель USB Hoco X29 Superior style Lightning чорний",
+        "price": "110 грн",
+        "stars": "4.7",
+        "src": "img/superior-black.png"
+    },
+    {
+        "code": "uUdFVlc5g1",
+        "alt": "hocoBigOrange",
+        "num": 9,
+        "name": "Кабель зарядки HOCO SILICONE X21 PLUS Orange",
+        "price": "190 грн",
+        "stars": "4.7",
+        "src": "img/hoco-orwnge.png"
+    },
+    {
+        "code": "tsoCROXEKZ",
+        "alt": "borofoneCharge",
+        "num": 10,
+        "name": "Мережевий Зарядний Пристрій Borofone BA38A Plus PD 20W 3A",
+        "price": "230 грн",
+        "stars": "4.8",
+        "src": "img/borofone-20w.png"
+    },
+    {
+        "code": "1o3R2Im3Qu",
+        "alt": "borofoneChargeOrange",
+        "num": 11,
+        "name": "Сетевое Зарядное Устройство Borofone BA61A 2.1A 5V 10.5W",
+        "price": "190 грн",
+        "stars": "4.8",
+        "src": "img/borofone-orange.png"
+    },
+    {
+        "code": "xQojXiVwde",
+        "alt": "borofone",
+        "num": 12,
+        "name": "Автотримач Borofone BH52",
+        "price": "170 грн",
+        "stars": "4.8",
+        "src": "img/borotone.png"
+    },
+    {
+        "code": "raDceKOBlu",
+        "alt": "hocoHeadphones",
+        "num": 13,
+        "name": "Навушники Hoco M86 Army Green",
+        "price": "160 грн",
+        "stars": "4.8",
+        "src": "img/hoco.png"
+    },
+    {
+        "code": "glquCaS22s",
+        "alt": "hocoHeadphonesBlack",
+        "num": 14,
+        "name": "Навушники Hoco M86 Black",
+        "price": "160 грн",
+        "stars": "4.8",
+        "src": "img/hoco-blue.png"
+    },
+    {
+        "code": "uQYcvGROwo",
+        "alt": "usbPowerBank",
+        "num": 15,
+        "name": "Лампа USB для power bank, нічник",
+        "price": "63 грн",
+        "stars": "4.8",
+        "src": "img/usb-powerbank.png"
+    },
+    {
+        "code": "jZKiH6aDwN",
+        "alt": "powerbar",
+        "num": 16,
+        "name": "Powerbar PowerGel Shots raspberry",
+        "price": "224 грн",
+        "stars": "4.8",
+        "src": "img/powerbar.png"
+    },
+    {
+        "code": "bwslnR94tW",
+        "alt": "paracordGrey",
+        "num": 17,
+        "name": "Браслет з паракорду трилобіт",
+        "price": "128 грн",
+        "stars": "4.8",
+        "src": "img/paracord-grey.png"
+    },
+    {
+        "code": "ugXbrJBZCu",
+        "alt": "paracordCobra",
+        "num": 18,
+        "name": "Браслет з паракорду кобра",
+        "price": "104 грн",
+        "stars": "4.8",
+        "src": "img/paracordCobra.png"
+    },
+    {
+        "code": "zSQ8rH4Eqf",
+        "alt": "paracordGreen",
+        "num": 19,
+        "name": "Браслет з паракорду подвійна кобра",
+        "price": "128 грн",
+        "stars": "4.8",
+        "src": "img/paracord-green.png"
+    }
+]

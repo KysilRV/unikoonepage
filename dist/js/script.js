@@ -10,10 +10,11 @@ window.addEventListener('DOMContentLoaded', () => {
         fail: 'img/fail.png'
     };
 
-    let cart = [];
+    let cart = [],
+        cartNumber = 0,
+        sum;
 
     const indexPage = 'index.html',
-          mainBlock = document.querySelector('#index'),
           body = document.querySelector('body'),
           footerLogo = document.querySelector('.footer__logo'),
           headerLogo = document.querySelector('.header__logo'),
@@ -37,7 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
           returnBtn = document.querySelector('#returnBtn'),
           start = document.querySelectorAll('.start'),
           cartNum = document.querySelector('.header__num'),
-          cartBlock = document.querySelector('.cart__block'),
           cartGrid = document.querySelector('.cart__grid'),
           btnPay = document.querySelector('.cart__pay'),
           cartNotFoundImg = document.querySelector('.cart__nothing'),
@@ -45,7 +45,9 @@ window.addEventListener('DOMContentLoaded', () => {
           cartBtn = document.querySelector('.header__block'),
           cartModal = document.querySelector('.cart'),
           overlay = document.querySelector('.overlay'),
-          cartClose = document.querySelector('.cart__close');
+          cartClose = document.querySelector('.cart__close'),
+          messageAdd = document.querySelector('.add'),
+          messageAlready = document.querySelector('.already');
 
     function sliderClass(sliderSelector, sliderWrapperSelector, nextSelector, prevSelector, width, slidesSelector) {
         let offset = 0;
@@ -146,58 +148,178 @@ window.addEventListener('DOMContentLoaded', () => {
         overlay.classList.add('animate__fadeOut');
     });
 
-    function cartAdd() {
+    function createCardBlock() {
+        getResource('./db.json')
+            .then(response => addCart(response))
+            .catch(error => console.log(error));
+    };
+
+    cart = [];
+
+    for (let i = 0; i < 20; i++) {
+        if (localStorage.getItem(i)) {
+            cart.push(localStorage.getItem(i))
+        };
+    };
+
+    if (cart.length > 0) {
+        removeNotFound();
+    };
+
+    setSum(cartNum);
+
+    console.log(cart);
+
+    cart.forEach(item => {
+        const block = document.querySelector(`[data-code="${item}"]`),
+              thisNum = block.getAttribute('data-id'),
+              name = block.querySelector('.products__name').textContent,
+              price = block.querySelector('.products__price').textContent,
+              stars = block.querySelector('.products__num').textContent,
+              src = block.querySelector('.products__img').getAttribute('src'),
+              alt = block.id;
+
+        createBlock(name, price, stars, src, alt, item, localStorage.getItem(item) ? localStorage.getItem(item) : 1, thisNum);
+        setSum(cartNum);
+        calcSum(document.querySelectorAll(`.cart__input`), price);
+    });
+
+    function addCart(res) {
         products.forEach(prod => {
             prod.addEventListener('click', function() {
-                const name = this.querySelector('.products__name').textContent,
-                      price = this.querySelector('.products__price').textContent,
-                      img = this.querySelector('.products__img').getAttribute('src'),
-                      id = this.id,
-                      mark = this.querySelector('.products__num').textContent;
+                let value = 1;
+                const thisNum = prod.getAttribute('data-id'),
+                      code = res[thisNum].code,
+                      name = res[thisNum].name,
+                      price = res[thisNum].price,
+                      stars = res[thisNum].stars,
+                      src = res[thisNum].src,
+                      alt = prod.id;
 
-                cartNum.textContent = document.querySelectorAll('.cart__block').length + 1;
-                cart.push(this.id);
-                createCartBlock(name, price, img, id, mark);
-                if (!cartBlock) {
-                    btnPay.style.display = 'block';
-                    cartNotFoundImg.style.display = 'none';
-                    cartNotFoundText.style.display = 'none';
-                };
-                const cartBlockClose = document.querySelectorAll('.cart__closeBlock');
-                cartBlockClose.forEach(close => {
-                    close.addEventListener('click', function() {
-                        console.log(1);
-/*                         cart.splice(cart.length - 1);
-                        this.parentNode.classList.add('animate__fadeOut');
-                        setTimeout(() => {
-                            this.parentNode.style.display = 'none';
-                        }, 400);
-                        cartNum.textContent = cart.length;
-                        console.log(cart);
-                        console.log(cart.length);
-                        console.log(cart[0] === this.parentNode.id)
-                        if (cart[0] === this.parentNode.id) {
-                            setTimeout(() => {
-                                btnPay.style.display = 'none';
-                                btnPay.classList.add('animate__fadeOut');
-                                cartNotFoundImg.style.display = 'block';
-                                cartNotFoundImg.classList.add('animate__fadeIn');
-                                cartNotFoundText.style.display = 'block';
-                                cartNotFoundText.classList.add('animate__fadeIn');
-                            }, 400);
-                        }; */
-                    });
-                });
+                if (localStorage.getItem(thisNum)) {
+                    messageAlready.style.top = '0';
+                    setTimeout(() => {
+                        messageAlready.style.top = '-100%';
+                    }, 2500);
+                    return;
+                }
+                createBlock(name, price, stars, src, alt, code, value, thisNum);
+                console.log(document.querySelectorAll(`.cart__input`))
+                calcSum(document.querySelectorAll(`.cart__input`), price)
+
+                messageAdd.style.top = '0';
+                setTimeout(() => {
+                    messageAdd.style.top = '-100%';
+                }, 2500);
+
+                setSum(cartNum);
+
+                localStorage.setItem(thisNum, code);
+
+                removeNotFound();
             });
         });
     };
-    function createCartBlock(name, price, img, id, mark) {
-        let newCartBlock = document.createElement('div');
-        newCartBlock.classList.add('cart__block');
-        newCartBlock.classList.add('animate__animated');
-        newCartBlock.setAttribute('id', id);
-        newCartBlock.innerHTML = `<img src="icons/close.svg" alt="close" class="cart__closeBlock"><img src=${img} alt=${id} class="cart__img">\n<div class="cart__info">\n<div class="cart__name">${name}</div>\n<div class="cart__more">\n<div class="cart__mark">\n<img src="icons/star.svg" alt="star" class="cart__star">\n<div class="cart__num">${mark}</div>\n</div>\n<div class="cart__lot">\n<button class="cart__minus">-</button>\n<input type="text" class="cart__input" placeholder="1">\n<button class="cart__plus">+</button>\n</div>\n<div class="cart__price">${price}</div>\n</div>\n</div>`;
-        cartGrid.append(newCartBlock);
+
+    function createBlock(name, price, stars, src, alt, code, value, thisNum) {
+        let card = document.createElement('div');
+    
+        card.classList.add('cart__block');
+        card.setAttribute('id', alt);
+        card.setAttribute('data-code', code);
+
+        card.innerHTML = `
+            <img src="icons/close.svg" alt="close" class="cart__closeBlock">
+            <img src=${src} alt=${alt} class="cart__img">
+            <div class="cart__info">
+                <div class="cart__name">${name}</div>
+                <div class="cart__more">
+                    <div class="cart__mark">
+                        <img src="icons/star.svg" alt="star" class="cart__star">
+                        <div class="cart__num">${stars}</div>
+                    </div>
+                    <div class="cart__lot">
+                        <button class="cart__minus">-</button>
+                        <input type="text" class="cart__input" value=${value}>
+                        <button class="cart__plus">+</button>
+                    </div>
+                    <div class="cart__price">${price}</div>
+                </div>
+            </div>
+        `;
+
+        cartGrid.appendChild(card);
+
+        removeNotFound();
+
+        const thisLot = card.querySelector('.cart__lot');
+                
+        thisLot.addEventListener('click', function(e) {
+            const target = e.target,
+                  cartPlus = this.querySelector('.cart__plus'),
+                  cartMinus = this.querySelector('.cart__minus'),
+                  cartInput = this.querySelector('.cart__input'),
+                  thisCartBlock = this.closest('.cart__block');
+            
+            if (target === cartPlus) {
+                ++cartInput.value;
+                localStorage.setItem(code, cartInput.value);
+                setSum(cartNum);
+                calcSum(document.querySelectorAll(`.cart__input`), price);
+            } else if (target === cartMinus) {
+                --cartInput.value;
+                localStorage.setItem(code, cartInput.value);
+                setSum(cartNum);
+                calcSum(document.querySelectorAll(`.cart__input`), price);
+                if (cartInput.value <= 0) {
+                    thisCartBlock.remove();
+                    setSum(cartNum);
+                    localStorage.removeItem(thisNum);
+                    localStorage.removeItem(code);
+                };
+            };
+        });
+    };
+
+    function calcSum(block, price) {
+        const end = document.querySelector('.card__endPrice');
+
+        if (block) {
+            block.forEach(input => {
+                console.log(input.value)
+                if (+input.value) {
+                    sum = +price.slice(0, -4);
+                } else {    
+                    sum = +price.slice(0, -4) * +input.value;
+                }
+            });
+            end.textContent = `${sum} грн`;
+        } else {
+            end.textContent = `--- грн`;
+        };
+    };
+
+    function setSum(variable) {
+        let num = 0;
+        const inputs = document.querySelectorAll('.cart__input');
+    
+        inputs.forEach(input => {
+            num = +input.value + num;
+        });
+
+        variable.textContent = num;
+    };
+
+    function removeNotFound() {
+        if (cartNumber >= 0) {
+            cartNotFoundImg.style.display = 'none';
+            cartNotFoundText.style.display = 'none';
+            btnPay.style.display = 'none';
+        } else {
+            cartNotFoundImg.style.display = 'block';
+            cartNotFoundText.style.display = 'block';
+            btnPay.style.display = 'block';
+        };
     };
 
     function filter(btn, theme, removeAn, showSelector) {
@@ -255,6 +377,16 @@ window.addEventListener('DOMContentLoaded', () => {
                 prod.classList.remove('displayNone');
             });
         });
+    };
+
+    const getResource = async (url) => {
+        let res = await fetch(url);
+    
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
+    
+        return await res.json();
     };
 
     const postData = async (url, data) => {
@@ -363,7 +495,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    cartAdd()
+    createCardBlock()
     animationAddSome(topPointItem, productsBlock, 0);
     animationAddSome(topPointItem, productsBlock, 1);
     animationAddSome(topPointItem, productsBlock, 2);
