@@ -1,0 +1,81 @@
+.continue {
+    &__wrapper {
+        position: relative;
+        padding: 60px 80px;
+        display: block;
+        background: var(--white);
+        border: 1px solid #000000;
+        box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 30px;
+    }
+    &__title {
+        font-family: 'Roboto';
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 56px;
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 60px;
+    }
+    &__inputs {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        &:focus {
+            svg {
+                fill: var(--text-color);
+            }
+        }
+    }
+    &__nameInput, &__phoneInput, &__emailInput {
+        padding: 20px;
+        border: none;
+        background: var(--main-color);
+        border-radius: 10px;
+        width: 250px;
+        margin-bottom: 25px;
+    }
+    &__cityInput {
+        padding: 20px;
+        border: none;
+        width: 100%;
+        background: var(--main-color);
+        border-radius: 10px;
+        width: 250px;
+    }
+    &__questionInput {
+        padding: 20px;
+        border: none;
+        width: 100%;
+        background: var(--main-color);
+        border-radius: 10px;
+        width: 250px;
+        resize: none;
+    }
+    &__locationInput {
+        padding: 20px;
+        border: none;
+        width: 40px;
+        background: var(--main-color);
+        border-radius: 10px;
+        text-align: center;
+    }
+    &__paymentInput {
+        padding: 20px;
+        border: none;
+        width: 100%;
+        background: var(--main-color);
+        border-radius: 10px;
+        width: 250px;
+    }
+    label {
+        margin-bottom: 10px;
+    }
+}

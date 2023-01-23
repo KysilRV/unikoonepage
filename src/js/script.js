@@ -47,7 +47,8 @@ window.addEventListener('DOMContentLoaded', () => {
           overlay = document.querySelector('.overlay'),
           cartClose = document.querySelector('.cart__close'),
           messageAdd = document.querySelector('.add'),
-          messageAlready = document.querySelector('.already');
+          messageAlready = document.querySelector('.already'),
+          continueInput = document.querySelectorAll('.continue__input');
 
     function sliderClass(sliderSelector, sliderWrapperSelector, nextSelector, prevSelector, width, slidesSelector) {
         let offset = 0;
@@ -60,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
         slider.style.width = 100 * slides.length + '%';
         slider.style.display = 'flex';
         slider.style.transition = '0.65s all';
-        sliderWrapper.style.overflowY = 'hidden';
+        sliderWrapper.style.overflow = 'hidden';
 
         slides.forEach(slides => {
             slides.style.width = width;
@@ -184,7 +185,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         createBlock(name, price, stars, src, alt, item, localStorage.getItem(item) ? localStorage.getItem(item) : 1, thisNum);
         setSum(cartNum);
-        calcSum(document.querySelectorAll(`.cart__input`), price);
+        calcSum(document.querySelectorAll(`.cart__block`));
     });
 
     function addCart(res) {
@@ -207,7 +208,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 createBlock(name, price, stars, src, alt, code, value, thisNum);
-                calcSum(document.querySelectorAll(`.cart__input`), price)
+                calcSum(document.querySelectorAll(`.cart__block`));
 
                 messageAdd.style.top = '0';
                 setTimeout(() => {
@@ -252,7 +253,7 @@ window.addEventListener('DOMContentLoaded', () => {
         cartGrid.appendChild(card);
 
         removeNotFound();
-        // removeBlock(card.querySelector('.cart__closeBlock'));
+        removeBlock(card.querySelector('.cart__closeBlock'));
 
         const thisLot = card.querySelector('.cart__lot');
                 
@@ -267,7 +268,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 ++cartInput.value;
                 localStorage.setItem(code, cartInput.value);
                 setSum(cartNum);
-                calcSum(document.querySelectorAll(`.cart__input`), price);
+                calcSum(document.querySelectorAll(`.cart__block`));
             } else if (target === cartMinus) {
                 --cartInput.value;
                 localStorage.setItem(code, cartInput.value);
@@ -283,12 +284,15 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    function calcSum(block, price) {
+    function calcSum(blocks) {
         const end = document.querySelector('.card__endPrice');
         sum = 0;
-        if (block) {
-            block.forEach(input => {
-                sum += +price.slice(0, -4) * +input.value;
+        if (blocks) {
+            blocks.forEach(block => {
+                const input = +block.querySelector('.cart__input').value,
+                      price = +block.querySelector('.cart__price').textContent.slice(0, -4);
+
+                sum += price * input;
             });
             end.textContent = `${sum} грн`;
         } else {
@@ -344,34 +348,37 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // function removeBlock(btn) {
-    //     btn.addEventListener('click', function() {
-    //         let num = 0;
-    //         const end = document.querySelector('.card__endPrice'),
-    //                 inputs = document.querySelectorAll('.cart__input'),
-    //                 thisBlock = this.parentNode,
-    //                 value = thisBlock.querySelector('.cart__input').value,
-    //                 price = thisBlock.querySelector('.cart__price').textContent.slice(0, -4);
+    function removeBlock(btn) {
+        btn.addEventListener('click', function() {
+            let num = 0;
+            const end = document.querySelector('.card__endPrice'),
+                    inputs = document.querySelectorAll('.cart__input'),
+                    thisBlock = this.parentNode,
+                    value = thisBlock.querySelector('.cart__input').value,
+                    price = thisBlock.querySelector('.cart__price').textContent.slice(0, -4);
             
-    //         inputs.forEach(input => {
-    //             num = +input.value + num;
-    //         });
+            inputs.forEach(input => {
+                num = +input.value + num;
+            });
 
-    //         thisBlock.remove();
-    //         localStorage.removeItem(thisBlock.getAttribute('data-id'));
-    //         localStorage.removeItem(thisBlock.getAttribute('data-code'));
+            thisBlock.remove();
+            localStorage.removeItem(thisBlock.getAttribute('data-id'));
+            localStorage.removeItem(thisBlock.getAttribute('data-code'));
 
-    //         sum -= +value * price;
-    //         console.log(+value * price)
-    //         end.textContent = `${sum} грн`;
-    //         if (sum <= 0) {
-    //             end.textContent = `--- грн`;
-    //             addNotFound(num, end);
-    //             setSum(cartNum);
-    //         };
-    //     });
-    // };
+            sum -= +value * price;
+            console.log(+value * price)
+            end.textContent = `${sum} грн`;
+            if (sum <= 0) {
+                end.textContent = `--- грн`;
+                addNotFound(num, end);
+                setSum(cartNum);
+            };
+        });
+    };
 
+    btnPay.addEventListener('click', () => {
+        
+    });
 
     function filter(btn, theme, removeAn, showSelector) {
         btn.addEventListener('click', () => {
@@ -543,6 +550,12 @@ window.addEventListener('DOMContentLoaded', () => {
             const cart = prod.querySelector('.products__cart');
             cart.classList.remove('animate__heartBeat');
             cart.style.opacity = '0';
+        });
+    });
+
+    continueInput.forEach(input => {
+        input.addEventListener('click', function() {
+            console.log(this.previousSibling);
         });
     });
 
