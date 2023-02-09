@@ -8,25 +8,26 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(51, 51, 51, 0.9) url("../img/loading.gif") center / 50px no-repeat;
+        background: rgba(51, 51, 51, 0.9) url("../img/spinner.gif") center / 50px no-repeat;
         opacity: 0;
         visibility: hidden;
     }
     &__wrapper {
         position: relative;
+        margin-right: 15px;
     }
     &__block {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 70px 30px;
+        padding: 70px 0;
         border-radius: 30px;
         width: 100%;
         background: var(--main-color);
         opacity: 0;
     }
     &__img {
-        margin-right: 60px;
+        margin: 0 60px 0 15px;
     }
     &__title {
         text-align: center;
@@ -50,8 +51,10 @@
         margin-top: 10px;
     }
     &__nametag {
+        width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
     }
     &__top, &__center, &__bottom {
         font-family: 'Roboto';
@@ -62,7 +65,7 @@
     }
     &__name {
         margin-top: 10px;
-        width: 283px;
+        width: 250px;
         margin-right: 15px;
         background: var(--white);
         border-radius: 5px;
@@ -80,7 +83,7 @@
     }
     &__email {
         margin-top: 10px;
-        width: 283px;
+        width: 250px;
         background: var(--white);
         border-radius: 5px;
         font-family: 'Roboto';
@@ -99,7 +102,7 @@
         margin-top: 30px;
     }
     &__question {
-        width: 620px;
+        width: 555px;
         margin-top: 10px;
         padding: 15px 20px;
         background: var(--white);

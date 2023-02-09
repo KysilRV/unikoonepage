@@ -48,7 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
           cartClose = document.querySelector('.cart__close'),
           messageAdd = document.querySelector('.add'),
           messageAlready = document.querySelector('.already'),
-          continueInput = document.querySelectorAll('.continue__input');
+          continueModal = document.querySelector('.continue'),
+          continueLabel = document.querySelectorAll('.continue__label'),
+          continueClose = document.querySelector('.continue__close'),
+          continueReturn = document.querySelector('.continue__return'),
+          select = document.querySelector('select');
 
     function sliderClass(sliderSelector, sliderWrapperSelector, nextSelector, prevSelector, width, slidesSelector) {
         let offset = 0;
@@ -136,10 +140,14 @@ window.addEventListener('DOMContentLoaded', () => {
         overlay.classList.add('animate__fadeIn');
         overlay.classList.remove('animate__fadeOut');
         overlay.style.display = 'block';
+        setTimeout(() => {
+            cartBtn.style.display = 'none';
+        }, 400);
     });
 
     function cartCloseBlock(btn) {
         btn.addEventListener('click', () => {
+            cartBtn.style.display = 'block';
             body.style.overflowY = 'scroll';
             cartModal.classList.add('animate__fadeOut');
             cartBtn.classList.remove('animate__fadeOut');
@@ -150,6 +158,36 @@ window.addEventListener('DOMContentLoaded', () => {
             overlay.classList.add('animate__fadeOut');
         });
     };
+
+    overlay.addEventListener('click', function(e) {
+        const target = e.target;
+
+        if (target === overlay && cartModal.classList.contains('animate__fadeIn')) {
+            body.style.overflowY = 'scroll';
+            cartModal.classList.add('animate__fadeOut');
+            cartBtn.style.display = 'block';
+            cartBtn.classList.remove('animate__fadeOut');
+            cartBtn.classList.add('animate__fadeIn');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+            overlay.classList.add('animate__fadeOut');
+        }
+    });
+
+    continueClose.addEventListener('click', () => {
+        continueModal.classList.add('animate__fadeOut');
+        continueModal.classList.remove('animate__fadeIn');
+        body.style.overflowY = 'scroll';
+        cartBtn.classList.remove('animate__fadeOut');
+        cartBtn.classList.add('animate__fadeIn');
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            cartModal.style.display = 'block';
+            continueModal.style.display = 'none';
+        }, 400);
+        overlay.classList.add('animate__fadeOut');
+    });
 
     cartCloseBlock(cartClose);
     cartCloseBlock(document.querySelector('.cart__continue'));
@@ -255,6 +293,18 @@ window.addEventListener('DOMContentLoaded', () => {
         removeNotFound();
         removeBlock(card.querySelector('.cart__closeBlock'));
 
+        document.querySelectorAll('.cart__input').forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/\D/g, '');
+            });
+            input.addEventListener('input', function() {
+                if (this.value <= 0) {
+                    this.value = 1;
+                };
+                calcSum(document.querySelectorAll('.cart__block'));
+            });
+        });
+
         const thisLot = card.querySelector('.cart__lot');
                 
         thisLot.addEventListener('click', function(e) {
@@ -285,7 +335,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     function calcSum(blocks) {
-        const end = document.querySelector('.card__endPrice');
+        const end = document.querySelector('.cart__endPrice');
         sum = 0;
         if (blocks) {
             blocks.forEach(block => {
@@ -301,14 +351,14 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     function sumMinus(price) {
-        const end = document.querySelector('.card__endPrice');
+        const end = document.querySelector('.cart__endPrice');
         sum -= +price.slice(0, -4);
         end.textContent = `${sum} грн`;
     };
 
     function setSum(variable) {
         let num = 0;
-        const end = document.querySelector('.card__endPrice');
+        const end = document.querySelector('.cart__endPrice');
         const inputs = document.querySelectorAll('.cart__input');
     
         inputs.forEach(input => {
@@ -351,7 +401,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function removeBlock(btn) {
         btn.addEventListener('click', function() {
             let num = 0;
-            const end = document.querySelector('.card__endPrice'),
+            const end = document.querySelector('.cart__endPrice'),
                     inputs = document.querySelectorAll('.cart__input'),
                     thisBlock = this.parentNode,
                     value = thisBlock.querySelector('.cart__input').value,
@@ -366,7 +416,6 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem(thisBlock.getAttribute('data-code'));
 
             sum -= +value * price;
-            console.log(+value * price)
             end.textContent = `${sum} грн`;
             if (sum <= 0) {
                 end.textContent = `--- грн`;
@@ -375,29 +424,23 @@ window.addEventListener('DOMContentLoaded', () => {
             };
         });
     };
-
-    btnPay.addEventListener('click', () => {
-        
-    });
-
+    
     function filter(btn, theme, removeAn, showSelector) {
         btn.addEventListener('click', () => {
             productsBlock.forEach(prod => {
                 setTimeout(() => {
-                    prod.classList.add('displayNone');
-                    prod.classList.remove('displayBlock');
+                    prod.style.display = 'none';
                 }, 400);
                 prod.classList.add('animate__fadeOut');
                 prod.style.opacity = '0';
                 theme.classList.remove('animate__fadeOut');
-                theme.classList.remove('displayNone');
                 theme.classList.remove(removeAn);
                 setTimeout(() => {
-                    theme.classList.add('displayBlock');
+                    theme.style.display = 'block';
                     theme.classList.add('animate__fadeIn');
                     prod.style.opacity = '1';
                 }, 400);
-                theme.querySelectorAll(showSelector).forEach(prod => prod.classList.add('displayBlock'));
+                theme.querySelectorAll(showSelector).forEach(prod => prod.style.display = 'block');
                 clearTimeout(animationAddSome);
             });
         });
@@ -407,35 +450,95 @@ window.addEventListener('DOMContentLoaded', () => {
         returnBtn.addEventListener('click', () => {
             products.forEach(prod => {
                 prod.classList.add('animate__fadeOut');
-                prod.classList.add('displayNone');
+                prod.style.display = 'none';
                 prod.classList.remove('animate__fadeIn');
-                prod.classList.remove('displayBlock');
             });
             productsBlock.forEach(item => {
                 item.classList.remove('animate__fadeOut');
-                item.classList.remove('displayNone');
                 item.classList.add('animate__fadeIn');
-                item.classList.add('displayBlock');
+                item.style.display = 'block'
             });
-            start.forEach(item => {
-                item.classList.add('animate__fadeIn');
-                item.classList.add('displayBlock');
-                item.classList.remove('animate__fadeOut');
-                item.classList.remove('displayNone');
-            });
+            if (document.querySelector('.container').clientWidth == 960) {
+                start.forEach(item => {
+                    item.classList.add('animate__fadeIn');
+                    item.style.display = 'block';
+                    item.classList.remove('animate__fadeOut');
+                    for (let i = 0; i < start.length - 2; ++i) {
+                        i += 2;
+                        start[i].style.display = 'none';
+                    }
+                });
+            } else {
+                start.forEach(item => {
+                    item.classList.add('animate__fadeIn');
+                    item.style.display = 'block';
+                    item.classList.remove('animate__fadeOut');
+                });
+                console.log(1);
+            }
         });
     };
 
     function removeFilter(btn) {
         btn.addEventListener('click', () => {
-            productsBlock.forEach(prod => {
-                prod.classList.add('displayBlock');
+            products.forEach(prod => {
+                prod.style.display = 'block'
                 prod.classList.remove('animate__fadeOut');
                 prod.classList.add('animate__fadeIn');
-                prod.classList.remove('displayNone');
             });
         });
     };
+
+    const mask = (selector) => {
+
+        let setCursorPosition = (pos, elem) => {
+            elem.focus();
+    
+            if (elem.setSelectionRange) {
+                elem.setSelectionRange(pos, pos);
+            } else if (elem.createTextRange) {
+                let range = elem.createTextRange();
+    
+                range.collapse(true);
+                range.moveEnd('character', pos);
+                range.moveStart('character', pos);
+                range.select();
+            }
+        };
+    
+        function createMask(e) {
+            let matrix = '+38 (___) ___ __ __',
+                i = 0,
+                def = matrix.replace(/\D/g, ''),
+                val = this.value.replace(/\D/g, '');
+    
+            if (def.length >= val.length) {
+                val = def;
+            }
+    
+            this.value = matrix.replace(/./g, function(a) {
+                return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+            });
+    
+            if (event.type === 'blur') {
+                if (this.value.length == 2) {
+                    this.value = '';
+                }
+            } else {
+                setCursorPosition(this.value.length, this);
+            }
+        }
+    
+        let inputs = document.querySelectorAll(selector);
+    
+        inputs.forEach(input => {
+            input.addEventListener('input', createMask);
+            input.addEventListener('focus', createMask);
+            input.addEventListener('blur', createMask);
+        });
+    };
+
+    mask('.continue__phoneInput');
 
     const getResource = async (url) => {
         let res = await fetch(url);
@@ -463,7 +566,7 @@ window.addEventListener('DOMContentLoaded', () => {
         textarea.value = '';
     };
 
-    function sendForm(btn, inputs, textarea) {
+    function sendForm(btn, inputs, textarea, option) {
         btn.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -472,7 +575,10 @@ window.addEventListener('DOMContentLoaded', () => {
             btn.parentNode.appendChild(statusMessage);
 
             btn.classList.add('animate__animated', 'animate__fadeOut');
-            setTimeout(() => btn.style.opacity = '0', 400);
+            setTimeout(() => {
+                btn.style.opacity = '0';
+                btn.style.visibility = 'hidden';
+            }, 400);
 
             let statusImg = document.createElement('img'),
                 textMessage = document.createElement('div');
@@ -480,7 +586,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 statusImg.setAttribute('src', message.spinner);
                 statusImg.classList.add('animate__animated', 'animate__fadeIn');
                 statusMessage.classList.add('statusMessage');
-                statusMessage.style.marginTop = '10px';
+                option ? statusMessage.style.marginTop = '60px' : statusMessage.style.marginTop = '10px';
                 statusMessage.appendChild(statusImg);
                 textMessage.textContent = message.loading;
                 textMessage.classList.add('textMessage');
@@ -489,7 +595,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(btn);
 
-            postData('../smart.php', formData)
+            if (option) {
+                let products = [];
+                const names = document.querySelectorAll('.cart__name'),
+                      num = document.querySelectorAll('.cart__input')
+
+                for (let i = 0; i < names.length; i++) {
+                    products.push(`${names[i].textContent} (${num[i].value})`);
+                };
+
+                console.log(products.join(', '));
+
+                formData.append("user_payment", select.value);
+                formData.append("user_products", products.join(', '));
+                formData.append("user_price", document.querySelector('.cart__endPrice').textContent);
+            };
+
+            postData('../mailer/smart.php', formData)
                 .then(res => {
                     console.log(res);
                     setTimeout(() => {
@@ -518,6 +640,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         }, 400);
                         setTimeout(() => {
                             btn.style.opacity = '1';
+                            btn.style.visibility = 'visible';
                             btn.classList.remove('animate__fadeOut');
                             btn.classList.add('animate__fadeIn');
                         }, 400);
@@ -529,15 +652,11 @@ window.addEventListener('DOMContentLoaded', () => {
     filterBtn.addEventListener('click', () => {
         if (filterBlock.style.opacity == '1') {
             filterBlock.style.opacity = '0';
-            filterBlock.classList.add('animate__fadeOutRightBig'); 
-            filterBlock.classList.remove('animate__fadeInRightBig');
             chevronDown.style.transform = 'rotate(0deg)';
         } else {
             filterBlock.style.opacity = '1';
-            filterBlock.classList.add('animate__fadeInRightBig');
-            filterBlock.classList.remove('animate__fadeOutRightBig');
             chevronDown.style.transform = 'rotate(-90deg)';
-        }
+        };
     });
 
     products.forEach(prod => {
@@ -553,12 +672,45 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    continueInput.forEach(input => {
-        input.addEventListener('click', function() {
-            console.log(this.previousSibling);
-        });
+    btnPay.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+        cartModal.classList.add('animate__fadeOut');
+        cartModal.classList.remove('animate__fadeIn');
+        continueModal.style.display = 'block';
+        continueModal.classList.add('animate__fadeIn');
+        continueModal.classList.remove('animate__fadeOut');
     });
 
+    continueReturn.addEventListener('click', () => {
+        continueModal.style.display = 'none';
+        continueModal.classList.add('animate__fadeOut');
+        continueModal.classList.remove('animate__fadeIn');
+        cartModal.style.display = 'block';
+        cartModal.classList.add('animate__fadeIn');
+        cartModal.classList.remove('animate__fadeOut');
+    });
+
+    continueModal.addEventListener('click', (e) => {
+        const target = e.target;
+
+        if (target.classList.contains('continue__input')) {
+            continueLabel.forEach(label => label.style.filter = 'brightness(100%)');
+            target.previousSibling.style.filter = 'brightness(25%)';
+        } else {
+            continueLabel.forEach(label => label.style.filter = 'brightness(100%)');
+        }
+    });
+
+    function onlyNums(inputSelector) {
+        const input = document.querySelector(inputSelector);
+        
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/\D/g, '');
+        });
+    };
+
+    onlyNums('.continue__phoneInput');
+    onlyNums('.continue__locationInput');
     createCardBlock()
     animationAddSome(topPointItem, productsBlock, 0);
     animationAddSome(topPointItem, productsBlock, 1);
@@ -576,6 +728,7 @@ window.addEventListener('DOMContentLoaded', () => {
     animationAdd(aboutSection, document.querySelector('.about__title'), 'animate__fadeInDownBig');
     animationAdd(aboutSection, document.querySelector('.about__text'), 'animate__fadeInRightBig');
     animationAdd(document.querySelector('.question'), document.querySelector('.question__block'), 'animate__fadeIn');
-    sendForm(document.querySelector('.question__form'), inputs, document.querySelector('textarea'), 'block');
+    sendForm(document.querySelector('.question__form'), inputs, document.querySelector('textarea'), false);
+    sendForm(document.querySelector('.continue__form'), document.querySelectorAll('.continue__input'), document.querySelector('.continue__textarea'), true);
     sliderClass('.promo__slider', '.promo__wrapper', '.promo__next', '.promo__prev', window.getComputedStyle(document.querySelector('.promo__wrapper')).width, '.promo__slide');
 });

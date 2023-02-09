@@ -68,7 +68,7 @@ body {
 
 .container {
     position: relative;
-    width: 1215px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -83,3 +83,5 @@ body {
 @import '1-page/cart';
 @import '1-page/modals';
 @import '1-page/continue';
+@import '1-page/aboutBlock';
+@import './media';

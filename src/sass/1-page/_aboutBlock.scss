@@ -1,0 +1,110 @@
+.aboutBlock {
+    position: relative;
+    padding: 60px 80px;
+    &__close {
+        position: absolute;
+        background: transparent;
+        top: 40px;
+        right: 50px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        cursor: pointer;
+        img {
+            height: 25px;
+            width: 25px;
+        }
+    }
+    &__title {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 47px;
+        text-align: center;
+        color: var(--text-color);
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+    }
+    &__grid {
+        width: calc(50% - 40px);
+    }
+    &__img {
+        margin-top: 80px;
+        width: calc(50% - 40px);
+        height: 400px;
+        object-fit: contain;
+    }
+    &__about {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 30px;
+        text-align: start;
+        color: var(--text-color);
+    }
+    &__text {
+        margin: 0;
+        margin-top: 10px;
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 25px;
+        text-align: start;
+        color: var(--text-color);
+    }
+    &__options {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 30px;
+        text-align: start;
+        color: var(--text-color);
+        margin-top: 20px;
+    }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+        &:nth-child(1) {
+            margin-top: 20px;
+        }
+    }
+    &__key, &__country {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 23px;
+        color: var(--text-color);
+    }
+    &__btns {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__return, &__cart {
+        background: var(--main-color);
+        border-radius: 5px;
+        padding: 15px 45px;
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        color: var(--text-color);
+        border: none;
+        transition: .5s;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.02);
+            filter: brightness(80%);
+        }
+    }
+    &__return {
+        margin-right: 20px;
+    }
+}

@@ -14,7 +14,8 @@
     border-top-right-radius: 0;
     border-top: none;
     transition: .5s;
-    background: var(--white);
+    background: var(--main-color);
+    z-index: 100;
     &__wrapper {
         position: relative;
     }
@@ -44,7 +45,8 @@
     border-top-right-radius: 0;
     border-top: none;
     transition: .5s;
-    background: var(--white);
+    background: var(--main-color);
+    z-index: 100;
     &__wrapper {
         position: relative;
     }
