@@ -1,11 +1,17 @@
 .aboutBlock {
     position: relative;
     padding: 60px 80px;
+    z-index: 11;
+    margin: 80px auto;
+    background-color: var(--white);
+    max-width: 1200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
     &__close {
         position: absolute;
         background: transparent;
-        top: 40px;
-        right: 50px;
+        top: 25px;
+        right: 40px;
         width: 36px;
         height: 36px;
         border: none;
@@ -14,6 +20,14 @@
             height: 25px;
             width: 25px;
         }
+    }
+    &__moreTextBtn {
+        display: none;
+        position: absolute;
+        top: 8px;
+        left: 110px;
+        transform: rotate(-90deg);
+        transition: .5s;
     }
     &__title {
         font-family: 'Roboto';
@@ -30,6 +44,7 @@
         margin-top: 60px;
     }
     &__grid {
+        position: relative;
         width: calc(50% - 40px);
     }
     &__img {
@@ -45,6 +60,7 @@
         line-height: 30px;
         text-align: start;
         color: var(--text-color);
+        text-decoration: underline;
     }
     &__text {
         margin: 0;
@@ -73,7 +89,7 @@
         &:nth-child(1) {
             margin-top: 20px;
         }
-        &:nth-child(8) {
+        &:nth-child(9) {
             margin-top: 30px;
         }
     }
@@ -85,7 +101,7 @@
         color: var(--text-color);
     }
     .price {
-        color: #000;
+        color: var(--fire-text);
     }
     &__btns {
         margin-top: 60px;
@@ -112,5 +128,14 @@
     }
     &__return {
         margin-right: 20px;
+    }
+    &__cart {
+        box-shadow: 0px 0px 8px var(--fire-text);
+    }
+    .rotateChevron {
+        transform: rotate(0deg);
+    }
+    .showInfoText {
+        display: block;
     }
 }

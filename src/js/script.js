@@ -54,7 +54,8 @@ window.addEventListener('DOMContentLoaded', () => {
           continueReturn = document.querySelector('.continue__return'),
           select = document.querySelector('select'),
           productsCart = document.querySelectorAll('.products__cart'),
-          productsRelative = document.querySelectorAll('.products__relative');
+          productsRelative = document.querySelectorAll('.products__relative'),
+          container = document.querySelector('.container');
 
     function sliderClass(sliderSelector, sliderWrapperSelector, nextSelector, prevSelector, width, slidesSelector) {
         let offset = 0;
@@ -237,31 +238,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     };
 
-    function moreInput() {
-        const thisInput = cartGrid.querySelector(`#${alt}`).querySelector('.cart__input'),
-              already = document.createElement('div'),
-              alreadyCheck = document.querySelector('.already__text');
-  
-        thisInput.value++;
-
-        if (alreadyCheck) {
-            alreadyCheck.remove();
-        };
-
-        already.classList.add('already__text');
-        already.textContent = `Елементів додано: ${thisInput.value}`;
-        document.querySelector('.already__wrapper').append(already);
-
-        messageAlready.style.top = '0';
-        setTimeout(() => {
-            messageAlready.style.top = '-100%';
-        }, 2500);
-
-        localStorage.setItem(cart.previousSibling.getAttribute('data-code'), thisInput.value);
-        calcSum(document.querySelectorAll(`.cart__block`));
-        setSum(cartNum);
-    };
-
     function addCart(res) {
         productsCart.forEach(cart => {
             cart.addEventListener('click', function() {
@@ -275,10 +251,30 @@ window.addEventListener('DOMContentLoaded', () => {
                       alt = cart.previousSibling.id;
 
                 if (localStorage.getItem(thisNum)) {
-                    moreInput();
+                    const thisInput = cartGrid.querySelector(`#${alt}`).querySelector('.cart__input'),
+                          already = document.createElement('div'),
+                          alreadyCheck = document.querySelector('.already__text');
+        
+                    thisInput.value++;
+            
+                    if (alreadyCheck) {
+                        alreadyCheck.remove();
+                    };
+            
+                    already.classList.add('already__text');
+                    already.textContent = `Елементів додано: ${thisInput.value}`;
+                    document.querySelector('.already__wrapper').append(already);
+            
+                    messageAlready.style.top = '0';
+                    setTimeout(() => {
+                        messageAlready.style.top = '-100%';
+                    }, 2500);
+            
+                    localStorage.setItem(cart.previousSibling.getAttribute('data-code'), thisInput.value);
+                    calcSum(document.querySelectorAll(`.cart__block`));
+                    setSum(cartNum);
                     return;
                 };
-
                 addMess()
 
                 createBlock(name, price, stars, src, alt, code, value, thisNum);
@@ -375,7 +371,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 sum += price * input;
             });
-            end.textContent = `${sum} грн`;
+            end.textContent = `${new Intl.NumberFormat('re-RU').format(sum)} грн`;
         } else {
             end.textContent = `--- грн`;
         };
@@ -427,6 +423,24 @@ window.addEventListener('DOMContentLoaded', () => {
             btnPay.classList.remove('animate__fadeOut');
             btnPay.classList.add('animate__fadeIn');
         }
+    };
+
+    if (document.querySelector('.container').clientWidth <= 960) {
+        start.forEach(item => {
+            item.classList.add('animate__fadeIn');
+            item.style.display = 'block';
+            item.classList.remove('animate__fadeOut');
+            for (let i = 0; i < start.length - 2; ++i) {
+                i += 2;
+                start[i].style.display = 'none';
+            }
+        });
+    } else {
+        start.forEach(item => {
+            item.classList.add('animate__fadeIn');
+            item.style.display = 'block';
+            item.classList.remove('animate__fadeOut');
+        });
     };
 
     function removeBlock(btn) {
@@ -500,14 +514,13 @@ window.addEventListener('DOMContentLoaded', () => {
                         start[i].style.display = 'none';
                     }
                 });
-                console.log(1)
             } else {
                 start.forEach(item => {
                     item.classList.add('animate__fadeIn');
                     item.style.display = 'block';
                     item.classList.remove('animate__fadeOut');
                 });
-            }
+            };
         });
     };
 
@@ -688,8 +701,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (filterBlock.style.opacity == '1') {
             filterBlock.style.opacity = '0';
             chevronDown.style.transform = 'rotate(0deg)';
+            filterBlock.style.zIndex = '-1'
         } else {
             filterBlock.style.opacity = '1';
+            filterBlock.style.zIndex = '1';
             chevronDown.style.transform = 'rotate(-90deg)';
         };
     });
@@ -733,7 +748,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function aboutBlockModal(res) {
         products.forEach(prod => {
-            prod.addEventListener('click', function(e) { 
+            prod.addEventListener('click', function() { 
                 const thisNum = prod.getAttribute('data-id'),
                       name = res[thisNum].name,
                       src = res[thisNum].src,
@@ -743,9 +758,6 @@ window.addEventListener('DOMContentLoaded', () => {
                       color = res[thisNum].color,
                       material = res[thisNum].material,
                       alt = prod.id,
-                      code = prod.getAttribute('data-code'),
-                      value = localStorage.getItem(code),
-                      stars = res[thisNum].stars,
                       block = document.querySelector('.aboutBlock'),
                       price = prod.querySelector('.products__price').textContent,
                       check = res[thisNum].cabel ?  `Довжина:` : res[thisNum].chargeBlock ? `Тип виходу:` : `Матеріал:`;
@@ -757,9 +769,9 @@ window.addEventListener('DOMContentLoaded', () => {
                         <div class="aboutBlock__wrapper">
                             <img class="aboutBlock__img" src="${src}" alt="${alt}"/>
                             <div class="aboutBlock__grid">
-                                <h3 class="aboutBlock__about">О товаре:</h3>
-                                <p class="aboutBlock__text">${descr}</p>
-                                <h3 class="aboutBlock__options">Характеристики:</h3>
+                                <h3 class="aboutBlock__about">Про товар</h3>
+                                <p class="aboutBlock__text animate__animated">${descr}</p>
+                                <h3 class="aboutBlock__options">Характеристики</h3>
                                 <div class="aboutBlock__item">
                                     <div class="aboutBlock__key">Країна виробник:</div>
                                     <div class="aboutBlock__country">${country}</div>
@@ -804,16 +816,12 @@ window.addEventListener('DOMContentLoaded', () => {
                     cartBtn.style.display= 'none';
                 }, 400);
 
-                document.querySelector('.aboutBlock__cart').addEventListener('click', () => {
-                    cart.forEach(item => {
-                        createBlock(name, price, stars, src, alt, code, localStorage.getItem(item) ? localStorage.getItem(item) : value ? value : 1, thisNum);
-                        closeInfo();
-
-                    });
+                document.querySelector('.aboutBlock__cart').addEventListener('click', function() {
+                    prod.nextSibling.click();
                 });
 
-                function closeInfo() {
-                    body.style.overflowY = 'visible';
+                document.querySelector('.aboutBlock__close').addEventListener('click', function() {
+                    body.style.overflowY = 'scroll';
                     overlay.classList.remove('animate__fadeIn');
                     overlay.classList.add('animate__fadeOut');
                     info.classList.add('animate__fadeOut');
@@ -823,14 +831,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     cartBtn.classList.remove('animate__fadeOut');
                     setTimeout(() => {
                         cartModal.style.display = 'block';
-                        this.parentNode.remove();
+                        document.querySelector('.aboutBlock__remove').remove();
                         overlay.style.display = 'none';
                         info.style.display = 'none';
                     }, 400);
-                };
-
-                document.querySelector('.aboutBlock__close').addEventListener('click', function() {
-                    closeInfo();
                 });
 
                 overlay.addEventListener('click', (e) => {
@@ -866,6 +870,33 @@ window.addEventListener('DOMContentLoaded', () => {
                         cartModal.classList.remove('animate__fadeOut');
                     }, 400);
                 });
+
+                if (container.clientWidth <= 720) {
+                    const text = document.querySelector('.aboutBlock__text').textContent,
+                          btn = document.querySelector('.aboutBlock__about'),
+                          textModal = document.querySelector('.overlayInfo'),
+                          textBlock = document.querySelector('.infoText__text'),
+                          close = document.querySelector('.infoText__close');
+                    btn.addEventListener('click', function() {
+                        textModal.style.display = 'block';
+                        textModal.style.opacity = '1';
+                        textBlock.append(text);
+                    });
+                    close.addEventListener('click', () => {
+                        textModal.style.opacity = '0';
+                        setTimeout(() => {
+                            textModal.style.display = 'none';
+                            textBlock.textContent = '';
+                        }, 700);
+                    });
+                    textModal.addEventListener('click', () => {
+                        textModal.style.opacity = '0';
+                        setTimeout(() => {
+                            textModal.style.display = 'none';
+                            textBlock.textContent = '';
+                        }, 700);
+                    });
+                };
             });
         });
     }; 
